@@ -1,0 +1,1257 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled4.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "authorship_tag": "ABX9TyPTLNhSleJwgmB83T0XB9Yg",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/abishek-ctrl/Cancer_Dataset/blob/main/loading_data\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vFjXCYEmQMYH",
+        "outputId": "809d4b43-7812-40e7-8be4-75f96f285dd4"
+      },
+      "source": [
+        "!pip3 install Pillow"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: Pillow in /usr/local/lib/python3.7/dist-packages (7.1.2)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xf_bhf03l5sW"
+      },
+      "source": [
+        "import pandas as pd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6kQqOBYuxHqj"
+      },
+      "source": [
+        "#!wget https://zenodo.org/record/3723295/files/seg-lungs-LUNA16.zip  "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RjV1GbWgxVO8"
+      },
+      "source": [
+        "#!unzip seg-lungs-LUNA16.zip"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1qjmbC0X3UqU"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Jd-InZBnxqYS"
+      },
+      "source": [
+        "#file_folder=\"seg-lungs-LUNA16.zip\"\n",
+        "#!unzip \"$file_folder\" "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Eom_iPnXyAM1"
+      },
+      "source": [
+        "data =!wget https://zenodo.org/record/3723295/files/subset0.zip"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SH4j1sEh54Qs",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "55670659-3705-4acc-825b-ae651ef7abac"
+      },
+      "source": [
+        "!jar xvf subset0.zip"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.105756658031515062000744821260.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.105756658031515062000744821260.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.108197895896446896160048741492.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.108197895896446896160048741492.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.109002525524522225658609808059.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.109002525524522225658609808059.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.111172165674661221381920536987.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.111172165674661221381920536987.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.122763913896761494371822656720.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.122763913896761494371822656720.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.124154461048929153767743874565.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.124154461048929153767743874565.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.126121460017257137098781143514.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.126121460017257137098781143514.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.126264578931778258890371755354.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.126264578931778258890371755354.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.128023902651233986592378348912.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.128023902651233986592378348912.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.129055977637338639741695800950.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.129055977637338639741695800950.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.130438550890816550994739120843.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.130438550890816550994739120843.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.134996872583497382954024478441.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.134996872583497382954024478441.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.137763212752154081977261297097.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.137763212752154081977261297097.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.138080888843357047811238713686.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.138080888843357047811238713686.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.139258777898746693365877042411.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.139258777898746693365877042411.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.139713436241461669335487719526.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.139713436241461669335487719526.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.141069661700670042960678408762.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.141069661700670042960678408762.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.144438612068946916340281098509.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.144438612068946916340281098509.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.146429221666426688999739595820.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.146429221666426688999739595820.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.154677396354641150280013275227.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.154677396354641150280013275227.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.187451715205085403623595258748.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.187451715205085403623595258748.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.188209889686363159853715266493.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.188209889686363159853715266493.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.188376349804761988217597754952.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.188376349804761988217597754952.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.194440094986948071643661798326.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.194440094986948071643661798326.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.194465340552956447447896167830.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.194465340552956447447896167830.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.202811684116768680758082619196.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.202811684116768680758082619196.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.210837812047373739447725050963.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.210837812047373739447725050963.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.213140617640021803112060161074.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.213140617640021803112060161074.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.216882370221919561230873289517.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.216882370221919561230873289517.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.219087313261026510628926082729.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.219087313261026510628926082729.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.219909753224298157409438012179.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.219909753224298157409438012179.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.227962600322799211676960828223.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.227962600322799211676960828223.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.231645134739451754302647733304.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.231645134739451754302647733304.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.238522526736091851696274044574.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.238522526736091851696274044574.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.241570579760883349458693655367.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.241570579760883349458693655367.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.249530219848512542668813996730.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.249530219848512542668813996730.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.250438451287314206124484591986.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.250438451287314206124484591986.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.250863365157630276148828903732.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.250863365157630276148828903732.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.269689294231892620436462818860.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.269689294231892620436462818860.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.272042302501586336192628818865.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.272042302501586336192628818865.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.277445975068759205899107114231.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.277445975068759205899107114231.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.278660284797073139172446973682.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.278660284797073139172446973682.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.280972147860943609388015648430.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.280972147860943609388015648430.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.281489753704424911132261151767.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.281489753704424911132261151767.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.293757615532132808762625441831.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.293757615532132808762625441831.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.294188507421106424248264912111.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.294188507421106424248264912111.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.295298571102631191572192562523.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.295298571102631191572192562523.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.295420274214095686326263147663.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.295420274214095686326263147663.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.302134342469412607966016057827.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.302134342469412607966016057827.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.303421828981831854739626597495.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.303421828981831854739626597495.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.305858704835252413616501469037.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.305858704835252413616501469037.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.310548927038333190233889983845.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.310548927038333190233889983845.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.310626494937915759224334597176.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.310626494937915759224334597176.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.311981398931043315779172047718.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.311981398931043315779172047718.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313334055029671473836954456733.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313334055029671473836954456733.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313605260055394498989743099991.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313605260055394498989743099991.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313835996725364342034830119490.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.313835996725364342034830119490.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.317087518531899043292346860596.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.317087518531899043292346860596.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.323302986710576400812869264321.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.323302986710576400812869264321.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.323859712968543712594665815359.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.323859712968543712594665815359.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.332453873575389860371315979768.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.332453873575389860371315979768.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.333145094436144085379032922488.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.333145094436144085379032922488.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.334517907433161353885866806005.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.334517907433161353885866806005.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.395623571499047043765181005112.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.395623571499047043765181005112.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.397062004302272014259317520874.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.397062004302272014259317520874.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.404364125369979066736354549484.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.404364125369979066736354549484.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.417815314896088956784723476543.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.417815314896088956784723476543.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.430109407146633213496148200410.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.430109407146633213496148200410.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.450501966058662668272378865145.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.450501966058662668272378865145.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.511347030803753100045216493273.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.511347030803753100045216493273.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.525937963993475482158828421281.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.525937963993475482158828421281.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.534006575256943390479252771547.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.534006575256943390479252771547.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.534083630500464995109143618896.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.534083630500464995109143618896.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.564534197011295112247542153557.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.564534197011295112247542153557.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.566816709786169715745131047975.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.566816709786169715745131047975.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.621916089407825046337959219998.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.621916089407825046337959219998.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.640729228179368154416184318668.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.640729228179368154416184318668.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.657775098760536289051744981056.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.657775098760536289051744981056.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.716498695101447665580610403574.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.716498695101447665580610403574.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.724251104254976962355686318345.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.724251104254976962355686318345.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.752756872840730509471096155114.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.752756872840730509471096155114.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.805925269324902055566754756843.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.805925269324902055566754756843.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.826812708000318290301835871780.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.826812708000318290301835871780.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.832260670372728970918746541371.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.832260670372728970918746541371.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.868211851413924881662621747734.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.868211851413924881662621747734.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.898642529028521482602829374444.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.898642529028521482602829374444.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.905371958588660410240398317235.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.905371958588660410240398317235.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.975254950136384517744116790879.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.975254950136384517744116790879.raw\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.979083010707182900091062408058.mhd\n",
+            " inflated: subset0/1.3.6.1.4.1.14519.5.2.1.6279.6001.979083010707182900091062408058.raw\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tkODBdbyB2dt"
+      },
+      "source": [
+        "#Edit:29-09-2021 :("
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "u_VHPDyEcDw3",
+        "outputId": "18a7f9b8-1165-4ac0-bf59-781f9b26b47f"
+      },
+      "source": [
+        "!pip install SimpleITK"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting SimpleITK\n",
+            "  Downloading SimpleITK-2.1.1-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (48.4 MB)\n",
+            "\u001b[K     |████████████████████████████████| 48.4 MB 5.5 kB/s \n",
+            "\u001b[?25hInstalling collected packages: SimpleITK\n",
+            "Successfully installed SimpleITK-2.1.1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kn9AyGsPbxb1"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns \n",
+        "\n",
+        "import os\n",
+        "import glob\n",
+        "\n",
+        "import SimpleITK as sitk\n",
+        "\n",
+        "from PIL import Image\n",
+        "\n",
+        "from imageio import imread\n",
+        "\n",
+        "%matplotlib inline\n",
+        "from IPython.display import clear_output\n",
+        "pd.options.mode.chained_assignment = None"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Q7VKcU1BcfGD"
+      },
+      "source": [
+        "annotations = pd.read_csv('annotations.csv')\n",
+        "candidates = pd.read_csv('candidates.csv')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "14JtPDFvi2OJ",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 206
+        },
+        "outputId": "9b9ebc35-3352-4211-a246-87fe6416fa72"
+      },
+      "source": [
+        "annotations.head()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>seriesuid</th>\n",
+              "      <th>coordX</th>\n",
+              "      <th>coordY</th>\n",
+              "      <th>coordZ</th>\n",
+              "      <th>diameter_mm</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222...</td>\n",
+              "      <td>-128.699421</td>\n",
+              "      <td>-175.319272</td>\n",
+              "      <td>-298.387506</td>\n",
+              "      <td>5.651471</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222...</td>\n",
+              "      <td>103.783651</td>\n",
+              "      <td>-211.925149</td>\n",
+              "      <td>-227.121250</td>\n",
+              "      <td>4.224708</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>1.3.6.1.4.1.14519.5.2.1.6279.6001.100398138793...</td>\n",
+              "      <td>69.639017</td>\n",
+              "      <td>-140.944586</td>\n",
+              "      <td>876.374496</td>\n",
+              "      <td>5.786348</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>1.3.6.1.4.1.14519.5.2.1.6279.6001.100621383016...</td>\n",
+              "      <td>-24.013824</td>\n",
+              "      <td>192.102405</td>\n",
+              "      <td>-391.081276</td>\n",
+              "      <td>8.143262</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>1.3.6.1.4.1.14519.5.2.1.6279.6001.100621383016...</td>\n",
+              "      <td>2.441547</td>\n",
+              "      <td>172.464881</td>\n",
+              "      <td>-405.493732</td>\n",
+              "      <td>18.545150</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "                                           seriesuid  ...  diameter_mm\n",
+              "0  1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222...  ...     5.651471\n",
+              "1  1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222...  ...     4.224708\n",
+              "2  1.3.6.1.4.1.14519.5.2.1.6279.6001.100398138793...  ...     5.786348\n",
+              "3  1.3.6.1.4.1.14519.5.2.1.6279.6001.100621383016...  ...     8.143262\n",
+              "4  1.3.6.1.4.1.14519.5.2.1.6279.6001.100621383016...  ...    18.545150\n",
+              "\n",
+              "[5 rows x 5 columns]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MeQtiebgjpAg",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "548da27c-c0a7-4306-9950-0a06dca30695"
+      },
+      "source": [
+        "candidates['class'].sum()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1351"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 20
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "GYi0tYVFDcZ1",
+        "outputId": "fd6ba1bc-297e-4070-bbd1-49b45a1e4d4f"
+      },
+      "source": [
+        "len(annotations)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1186"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BAWMqR-LFMU_",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d968efe6-6219-4038-9556-5c02ce5ad575"
+      },
+      "source": [
+        "candidates.info()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 551065 entries, 0 to 551064\n",
+            "Data columns (total 5 columns):\n",
+            " #   Column     Non-Null Count   Dtype  \n",
+            "---  ------     --------------   -----  \n",
+            " 0   seriesuid  551065 non-null  object \n",
+            " 1   coordX     551065 non-null  float64\n",
+            " 2   coordY     551065 non-null  float64\n",
+            " 3   coordZ     551065 non-null  float64\n",
+            " 4   class      551065 non-null  int64  \n",
+            "dtypes: float64(3), int64(1), object(1)\n",
+            "memory usage: 21.0+ MB\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hmDtWCIyFdxN",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "8acb2ba5-e071-4122-aacd-f83761be8bc9"
+      },
+      "source": [
+        "print (len(candidates[candidates['class'] == 1]))\n",
+        "print (len(candidates[candidates['class'] == 0]))"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1351\n",
+            "549714\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "v7NvtinEFnHw",
+        "outputId": "6b1534a2-15da-43a0-aaf7-899bcb13c2fa"
+      },
+      "source": [
+        "import multiprocessing\n",
+        "num_cores = multiprocessing.cpu_count()\n",
+        "print (num_cores)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "4rVO5J1DYfBo",
+        "outputId": "e3ab3fe1-f0ec-4a06-a502-e5fc3a2b935a"
+      },
+      "source": [
+        "pwd"
+      ],
+      "execution_count": 92,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            },
+            "text/plain": [
+              "'/content/subset0'"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 92
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XtHsZzPDFpfX"
+      },
+      "source": [
+        "class CTScan(object):\n",
+        "    def __init__(self, filename = None, coords = None):\n",
+        "        self.filename = filename\n",
+        "        self.coords = coords\n",
+        "        self.ds = None\n",
+        "        self.image = None\n",
+        "\n",
+        "    def reset_coords(self, coords):\n",
+        "        self.coords = coords\n",
+        "\n",
+        "    def read_mhd_image(self):\n",
+        "        path = glob.glob(''+ self.filename + '.mhd')\n",
+        "        self.ds = sitk.ReadImage(path[0])\n",
+        "        self.image = sitk.GetArrayFromImage(self.ds)\n",
+        "\n",
+        "    def get_resolution(self):\n",
+        "        return self.ds.GetSpacing()\n",
+        "\n",
+        "    def get_origin(self):\n",
+        "        return self.ds.GetOrigin()\n",
+        "\n",
+        "    def get_ds(self):\n",
+        "        return self.ds\n",
+        "\n",
+        "    def get_voxel_coords(self):\n",
+        "        origin = self.get_origin()\n",
+        "        resolution = self.get_resolution()\n",
+        "        voxel_coords = [np.absolute(self.coords[j]-origin[j])/resolution[j] \\\n",
+        "            for j in range(len(self.coords))]\n",
+        "        return tuple(voxel_coords)\n",
+        "    \n",
+        "    def get_image(self):\n",
+        "        return self.image\n",
+        "    \n",
+        "    def get_subimage(self, width):\n",
+        "        self.read_mhd_image()\n",
+        "        x, y, z = self.get_voxel_coords()\n",
+        "        subImage = self.image[z, y-width/2:y+width/2, x-width/2:x+width/2]\n",
+        "        return subImage   \n",
+        "    \n",
+        "    def normalizePlanes(self, npzarray):\n",
+        "        maxHU = 400.\n",
+        "        minHU = -1000.\n",
+        "        npzarray = (npzarray - minHU) / (maxHU - minHU)\n",
+        "        npzarray[npzarray>1] = 1.\n",
+        "        npzarray[npzarray<0] = 0.\n",
+        "        return npzarray\n",
+        "    \n",
+        "    def save_image(self, filename, width):\n",
+        "        image = self.get_subimage(width)\n",
+        "        image = self.normalizePlanes(image)\n",
+        "        Image.fromarray(image*255).convert('L').save(filename)"
+      ],
+      "execution_count": 93,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8TTQa-mIGJ_C"
+      },
+      "source": [
+        "positives = candidates[candidates['class']==1].index  \n",
+        "negatives = candidates[candidates['class']==0].index"
+      ],
+      "execution_count": 94,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XwGE_JqPUF-A",
+        "outputId": "13a6a346-7dae-4be2-a4f2-9d85a40de7f6"
+      },
+      "source": [
+        "negatives"
+      ],
+      "execution_count": 95,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Int64Index([     0,      1,      2,      3,      4,      5,      6,      7,\n",
+              "                 8,      9,\n",
+              "            ...\n",
+              "            551055, 551056, 551057, 551058, 551059, 551060, 551061, 551062,\n",
+              "            551063, 551064],\n",
+              "           dtype='int64', length=549714)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 95
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oIt5pRXxGhoO"
+      },
+      "source": [
+        "scan = CTScan(np.asarray(candidates.loc[negatives[600]])[0],\\\n",
+        "              np.asarray(candidates.loc[negatives[600]])[1:-1])\n"
+      ],
+      "execution_count": 96,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 286
+        },
+        "id": "Yy7PPoe4V-fD",
+        "outputId": "1d6fbabb-a0ad-43f1-94b4-0b2fba181c13"
+      },
+      "source": [
+        "scan.read_mhd_image()"
+      ],
+      "execution_count": 97,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndexError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mIndexError\u001b[0m                                Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-97-e3e090660100>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_mhd_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;32m<ipython-input-93-1f53265fce59>\u001b[0m in \u001b[0;36mread_mhd_image\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     11\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mread_mhd_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     12\u001b[0m         \u001b[0mpath\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mglob\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mglob\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m''\u001b[0m\u001b[0;34m+\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfilename\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m'.mhd'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 13\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mds\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0msitk\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mReadImage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     14\u001b[0m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mimage\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0msitk\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mGetArrayFromImage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     15\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mIndexError\u001b[0m: list index out of range"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 362
+        },
+        "id": "ezJM1YpeV6SG",
+        "outputId": "e108d371-3a92-4f5f-cd5b-2721a68ee280"
+      },
+      "source": [
+        "x, y, z = scan.get_voxel_coords()\n",
+        "image = scan.get_image()\n",
+        "dx, dy, dz = scan.get_resolution()\n",
+        "x0, y0, z0 = scan.get_origin()"
+      ],
+      "execution_count": 98,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "AttributeError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-98-ac63ff4fb72d>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mx\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mz\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_voxel_coords\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mimage\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mdx\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdy\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdz\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_resolution\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mx0\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my0\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mz0\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_origin\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m<ipython-input-93-1f53265fce59>\u001b[0m in \u001b[0;36mget_voxel_coords\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     24\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     25\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mget_voxel_coords\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 26\u001b[0;31m         \u001b[0morigin\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_origin\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     27\u001b[0m         \u001b[0mresolution\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_resolution\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     28\u001b[0m         \u001b[0mvoxel_coords\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mabsolute\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcoords\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mj\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0morigin\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mj\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m/\u001b[0m\u001b[0mresolution\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mj\u001b[0m\u001b[0;34m]\u001b[0m             \u001b[0;32mfor\u001b[0m \u001b[0mj\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mrange\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcoords\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m<ipython-input-93-1f53265fce59>\u001b[0m in \u001b[0;36mget_origin\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     18\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     19\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mget_origin\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 20\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mds\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mGetOrigin\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     21\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     22\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mget_ds\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mAttributeError\u001b[0m: 'NoneType' object has no attribute 'GetOrigin'"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uygemMSbYHeZ",
+        "outputId": "2efad12c-a52e-4c8e-caa8-5f25f8737917"
+      },
+      "source": [
+        "cd subset0"
+      ],
+      "execution_count": 99,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[Errno 2] No such file or directory: 'subset0'\n",
+            "/content/subset0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 356
+        },
+        "id": "H4XSIE1bHHK7",
+        "outputId": "9ec7243b-d037-4138-ab71-5f604dbfe348"
+      },
+      "source": [
+        "filename = '1.3.6.1.4.1.14519.5.2.1.6279.6001.100398138793540579077826395208'\n",
+        "coords = (70.19, -140.93, 877.68)#[877.68, -140.93, 70.19]\n",
+        "scan = CTScan(filename, coords)\n",
+        "scan.read_mhd_image()\n",
+        "x, y, z = scan.get_voxel_coords()\n",
+        "image = scan.get_image()\n",
+        "dx, dy, dz = scan.get_resolution()\n",
+        "x0, y0, z0 = scan.get_origin()"
+      ],
+      "execution_count": 100,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndexError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mIndexError\u001b[0m                                Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-100-b34ab7589309>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0mcoords\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m70.19\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m140.93\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m877.68\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;31m#[877.68, -140.93, 70.19]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mscan\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mCTScan\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilename\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcoords\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 4\u001b[0;31m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_mhd_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      5\u001b[0m \u001b[0mx\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mz\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_voxel_coords\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[0mimage\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscan\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m<ipython-input-93-1f53265fce59>\u001b[0m in \u001b[0;36mread_mhd_image\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     11\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mread_mhd_image\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     12\u001b[0m         \u001b[0mpath\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mglob\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mglob\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m''\u001b[0m\u001b[0;34m+\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfilename\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m'.mhd'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 13\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mds\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0msitk\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mReadImage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     14\u001b[0m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mimage\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0msitk\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mGetArrayFromImage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     15\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mIndexError\u001b[0m: list index out of range"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lI_Ht4ZVHOfC",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "fcc2fac6-ece1-40bf-e932-4d6464c9a4d6"
+      },
+      "source": [
+        "positives"
+      ],
+      "execution_count": 101,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Int64Index([    13,     78,   1303,   3050,   3052,   3080,   3223,   3285,\n",
+              "              3287,   3289,\n",
+              "            ...\n",
+              "            545928, 546205, 546372, 546400, 547498, 548674, 550171, 550334,\n",
+              "            550810, 550906],\n",
+              "           dtype='int64', length=1351)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 101
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RICKCDLJSatk"
+      },
+      "source": [
+        "np.random.seed(42)\n",
+        "negIndexes = np.random.choice(negatives, len(positives)*5, replace = False)"
+      ],
+      "execution_count": 102,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EIHqmQgMSa4Y"
+      },
+      "source": [
+        "candidatesDf = candidates.iloc[list(positives)+list(negIndexes)]"
+      ],
+      "execution_count": 103,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "grzG8L_ISa9v"
+      },
+      "source": [
+        "from sklearn.model_selection import train_test_split\n",
+        "X = candidatesDf.iloc[:,:-1]\n",
+        "y = candidatesDf.iloc[:,-1]\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 42)"
+      ],
+      "execution_count": 106,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NG70-qSNSbAX"
+      },
+      "source": [
+        "X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size = 0.20, random_state = 42)"
+      ],
+      "execution_count": 107,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "d98Bww6GSbDE",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "2537a7da-99bf-461f-88a8-84007bb657e3"
+      },
+      "source": [
+        "len(X_train)"
+      ],
+      "execution_count": 108,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "5187"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 108
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dVVfxcvKSliL"
+      },
+      "source": [
+        "X_train.to_pickle('traindata')\n",
+        "X_test.to_pickle('testdata')\n",
+        "X_val.to_pickle('valdata')"
+      ],
+      "execution_count": 109,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CJuRlfrJSlmL"
+      },
+      "source": [
+        "def normalizePlanes(npzarray):\n",
+        "    maxHU = 400.\n",
+        "    minHU = -1000.\n",
+        "    npzarray = (npzarray - minHU) / (maxHU - minHU)\n",
+        "    npzarray[npzarray>1] = 1.\n",
+        "    npzarray[npzarray<0] = 0.\n",
+        "    return npzarray"
+      ],
+      "execution_count": 110,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CPMSJKK_SlqG",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "164b0496-89db-41d0-8fd7-bcd645530def"
+      },
+      "source": [
+        "print ('number of positive cases are ' + str(y_train.sum()))\n",
+        "print ('total set size is ' + str(len(y_train)))\n",
+        "print ('percentage of positive cases are ' + str(y_train.sum()*1.0/len(y_train)))"
+      ],
+      "execution_count": 112,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "number of positive cases are 845\n",
+            "total set size is 5187\n",
+            "percentage of positive cases are 0.16290726817042606\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "q66yjDRISlua",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "76e30ed0-c5a3-493f-9310-efdeec973835"
+      },
+      "source": [
+        "tempDf = X_train[y_train == 1]\n",
+        "tempDf = tempDf.set_index(X_train[y_train == 1].index + 1000000)\n",
+        "X_train_new = X_train.append(tempDf)\n",
+        "tempDf = tempDf.set_index(X_train[y_train == 1].index + 2000000)\n",
+        "X_train_new = X_train_new.append(tempDf)\n",
+        "\n",
+        "ytemp = y_train.reindex(X_train[y_train == 1].index + 1000000)\n",
+        "ytemp.loc[:] = 1\n",
+        "y_train_new = y_train.append(ytemp)\n",
+        "ytemp = y_train.reindex(X_train[y_train == 1].index + 2000000)\n",
+        "ytemp.loc[:] = 1\n",
+        "y_train_new = y_train_new.append(ytemp)\n",
+        "\n",
+        "print (len(X_train_new), len(y_train_new))"
+      ],
+      "execution_count": 114,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "6877 6877\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7ol1NS6TSvfG",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "4e6783f7-67c0-4fb4-9cdd-a2a7dc66dded"
+      },
+      "source": [
+        "X_train_new.index"
+      ],
+      "execution_count": 115,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Int64Index([  59270,  150277,  432208,  423122,  344581,   75111,  246217,\n",
+              "             292479,  147683,  468235,\n",
+              "            ...\n",
+              "            2282167, 2300642, 2021354, 2461166, 2332952, 2436163, 2013078,\n",
+              "            2352132, 2188812, 2459476],\n",
+              "           dtype='int64', length=6877)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 115
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kWlxtYolZjXZ"
+      },
+      "source": [
+        "import cv2"
+      ],
+      "execution_count": 122,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mYGCVjtUSvhf"
+      },
+      "source": [
+        "from PIL import ImageEnhance\n",
+        "\n",
+        "class PreProcessing(object):\n",
+        "    def __init__(self, image = None):\n",
+        "        self.image = image\n",
+        "    \n",
+        "    def subtract_mean(self):\n",
+        "        self.image = (self.image/255.0 - 0.25)*255\n",
+        "        return self.image\n",
+        "    \n",
+        "    def downsample_data(self):\n",
+        "        self.image = imresize(self.image, size = (40, 40), interp='bilinear', mode='L')\n",
+        "        return self.image\n",
+        "    \n",
+        "    def enhance_contrast(self):\n",
+        "        self.image = ImageEnhance.Contrast(self.image)\n",
+        "        return self.image\n",
+        "        "
+      ],
+      "execution_count": 123,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "85BgGTD7S0l5",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 398
+        },
+        "outputId": "0fecabe3-92fb-40a9-b44a-d3b16ae5c61d"
+      },
+      "source": [
+        "dirName = '/traindata/'\n",
+        "plt.figure(figsize = (10,10))\n",
+        "inp = imread(dirName + 'image_'+ str(30517) + '.jpg')\n",
+        "plt.subplot(221)\n",
+        "plt.imshow(inp)\n",
+        "plt.grid(False)\n",
+        "\n",
+        "Pp = PreProcessing(inp)\n",
+        "\n",
+        "inp2 = Pp.subtract_mean()\n",
+        "plt.subplot(222)\n",
+        "plt.imshow(inp2)\n",
+        "plt.grid(False)\n",
+        "\n",
+        "#inp4 = Pp.enhance_contrast()\n",
+        "#plt.subplot(224)\n",
+        "#plt.imshow(inp4)\n",
+        "#plt.grid(False)\n",
+        "\n",
+        "inp3 = Pp.downsample_data()\n",
+        "plt.subplot(223)\n",
+        "plt.imshow(inp3)\n",
+        "plt.grid(False)\n",
+        "\n",
+        "#inp4 = Pp.enhance_contrast()\n",
+        "#plt.subplot(224)\n",
+        "#plt.imshow(inp4)\n",
+        "#plt.grid(False)"
+      ],
+      "execution_count": 126,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "FileNotFoundError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mFileNotFoundError\u001b[0m                         Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-126-f54ce3d9af4c>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0mdirName\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'/traindata/'\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfigure\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfigsize\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m10\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m10\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 3\u001b[0;31m \u001b[0minp\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mimread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdirName\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m'image_'\u001b[0m\u001b[0;34m+\u001b[0m \u001b[0mstr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m30517\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m'.jpg'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msubplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m221\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mimshow\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0minp\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/imageio/core/functions.py\u001b[0m in \u001b[0;36mimread\u001b[0;34m(uri, format, **kwargs)\u001b[0m\n\u001b[1;32m    219\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    220\u001b[0m     \u001b[0;31m# Get reader and read first\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 221\u001b[0;31m     \u001b[0mreader\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0muri\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mformat\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"i\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    222\u001b[0m     \u001b[0;32mwith\u001b[0m \u001b[0mreader\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    223\u001b[0m         \u001b[0;32mreturn\u001b[0m \u001b[0mreader\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_data\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/imageio/core/functions.py\u001b[0m in \u001b[0;36mget_reader\u001b[0;34m(uri, format, mode, **kwargs)\u001b[0m\n\u001b[1;32m    128\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    129\u001b[0m     \u001b[0;31m# Create request object\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 130\u001b[0;31m     \u001b[0mrequest\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mRequest\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0muri\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"r\"\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0mmode\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    131\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    132\u001b[0m     \u001b[0;31m# Get format\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/imageio/core/request.py\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, uri, mode, **kwargs)\u001b[0m\n\u001b[1;32m    123\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    124\u001b[0m         \u001b[0;31m# Parse what was given\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 125\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_parse_uri\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0muri\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    126\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    127\u001b[0m         \u001b[0;31m# Set extension\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/imageio/core/request.py\u001b[0m in \u001b[0;36m_parse_uri\u001b[0;34m(self, uri)\u001b[0m\n\u001b[1;32m    271\u001b[0m                 \u001b[0;31m# Reading: check that the file exists (but is allowed a dir)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    272\u001b[0m                 \u001b[0;32mif\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0mos\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mexists\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfn\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 273\u001b[0;31m                     \u001b[0;32mraise\u001b[0m \u001b[0mFileNotFoundError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"No such file: '%s'\"\u001b[0m \u001b[0;34m%\u001b[0m \u001b[0mfn\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    274\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    275\u001b[0m                 \u001b[0;31m# Writing: check that the directory to write to does exist\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mFileNotFoundError\u001b[0m: No such file: '/traindata/image_30517.jpg'"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<Figure size 720x720 with 0 Axes>"
+            ]
+          },
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "VqtbEcsiS0vu"
+      },
+      "source": [
+        "#Bad_Luck 01-10-2021 :("
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
