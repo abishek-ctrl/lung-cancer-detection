@@ -30,10 +30,13 @@ The dataset used for training and testing the models is stored in `data.csv`. It
 The following machine learning models have been implemented and evaluated:
 
 - Linear Regression
+- Logistic Regression
 - Gradient Boosting
 - k-Nearest Neighbors (KNN)
-- Decision Tree
-- [More Models to be added]
+- Decision Tree Classifier
+- Random Forest Classifier
+- CATBoost Classifier
+- XGBoost Classifier
 
 **Usage**
 
@@ -43,7 +46,6 @@ The following machine learning models have been implemented and evaluated:
 3. Ensure Python 3.x is used.
 
 **Running the Models**
-- Navigate to the model's specific file (e.g., `linear_regression_model.py`).
 - Execute the file to train and evaluate the model.
 
 **Results**
