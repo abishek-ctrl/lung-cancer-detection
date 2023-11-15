@@ -46,11 +46,14 @@ The following machine learning models have been implemented and evaluated:
 3. Ensure Python 3.x is used.
 
 **Running the Models**
+- `model.ipynb` contains the model training and testing process for all the models. 
 - Execute the file to train and evaluate the model.
+
+- NOTE: Use a separate conda environment for avoiding future errors with dependencies.
 
 **Results**
 
-The performance metrics and evaluation results for each model are documented in the respective model's file or notebook. 
+The performance metrics and evaluation results for each model are documented in the respective model's notebook. 
 
 **Future Improvements**
 
@@ -69,4 +72,7 @@ This project is licensed under the [Apache License](LICENSE).
 
 **Acknowledgments**
 
-- Mention any contributors or resources that were helpful in developing this project.
+- Dataset Credits : https://www.kaggle.com/datasets/mysarahmadbhat/lung-cancer
+- Reference : https://www.kaggle.com/code/casper6290/lung-cancer-prediction-98
+
+The above notebook was helpful in terms of understanding the preprocessing and model development process properly.
