@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lung Cancer Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        label, select {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lung Cancer Detection</h1>
+        <form action="/predict" method="post">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select>
+            
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age">
+            
+            <label for="smoking">Smoking:</label>
+            <select name="smoking" id="smoking">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="yellow_fingers">Yellow Fingers:</label>
+            <select name="yellow_fingers" id="yellow_fingers">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="anxiety">Anxiety:</label>
+            <select name="anxiety" id="anxiety">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="peer_pressure">Peer Pressure:</label>
+            <select name="peer_pressure" id="peer_pressure">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="chronic_disease">Chronic Disease:</label>
+            <select name="chronic_disease" id="chronic_disease">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="fatigue">Fatigue:</label>
+            <select name="fatigue" id="fatigue">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="allergy">Allergy:</label>
+            <select name="allergy" id="allergy">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="wheezing">Wheezing:</label>
+            <select name="wheezing" id="wheezing">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="alcohol_consuming">Alcohol Consuming:</label>
+            <select name="alcohol_consuming" id="alcohol_consuming">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="coughing">Coughing:</label>
+            <select name="coughing" id="coughing">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="shortness_of_breath">Shortness of Breath:</label>
+            <select name="shortness_of_breath" id="shortness_of_breath">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="swallowing_difficulty">Swallowing Difficulty:</label>
+            <select name="swallowing_difficulty" id="swallowing_difficulty">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+            
+            <label for="chest_pain">Chest Pain:</label>
+            <select name="chest_pain" id="chest_pain">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+            </select>
+                   
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
